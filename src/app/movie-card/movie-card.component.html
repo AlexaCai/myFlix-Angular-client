@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <mat-card *ngFor="let movie of movies; let i=index;">
+        <mat-dialog-content>
+            <mat-card-title>{{movie.Title}}</mat-card-title>
+            <mat-card-subtitle><img src={{movie.ImagePath}}/></mat-card-subtitle>
+        </mat-dialog-content>
+    </mat-card>
+</body>
+</html>
