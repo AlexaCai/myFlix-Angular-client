@@ -18,6 +18,7 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { GenreDetailsComponent } from './genre-details/genre-details.component';
+import { DirectorDetailsComponent } from './director-details/director-details.component';
 
 
 const appRoutes: Routes = [
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     UserLoginFormComponent,
     MovieCardComponent,
     WelcomePageComponent,
-    GenreDetailsComponent
+    GenreDetailsComponent,
+    DirectorDetailsComponent
   ],
   imports: [
     BrowserModule,
