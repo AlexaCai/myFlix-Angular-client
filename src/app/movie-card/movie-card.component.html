@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <app-navigation-bar></app-navigation-bar>
     <div style="display: flex;">
         <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;">
             <mat-card-header>
@@ -16,16 +17,19 @@
             </mat-card-header>
             <img src={{movie.ImagePath}} alt={{movie.Title}} />
             <mat-card-actions>
-                <button mat-button color="primary">
+                <button (click)="openGenreDialogue(movie.Genre)" mat-button color="primary">
                     Genre
                 </button>
-                <button mat-button color="primary">
+                <button (click)="openDirectorDialogue(movie.Director)" mat-button color="primary">
                     Director
                 </button>
-                <button mat-button color="primary">
+                <button (click)="openSynopsisDialogue(movie.Description)" mat-button color="primary">
                     Synopsis
                 </button>
-                <mat-icon>favorite_border</mat-icon>
+                <mat-icon *ngIf="!favoriteButtonStates[movie._id]"
+                    (click)="addToFavorite(movie._id); openAddToFavoriteDialogue(movie.Title)">favorite_border</mat-icon>
+                <mat-icon *ngIf="favoriteButtonStates[movie._id]"
+                    (click)="removeFromFavorite(movie._id); openRemoveFromFavoriteDialogue(movie.Title) ">favorite</mat-icon>
             </mat-card-actions>
         </mat-card>
     </div>

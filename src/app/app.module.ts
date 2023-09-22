@@ -17,6 +17,14 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { MatIconModule } from '@angular/material/icon';
+import { GenreDetailsComponent } from './genre-details/genre-details.component';
+import { DirectorDetailsComponent } from './director-details/director-details.component';
+import { SynopsisDetailsComponent } from './synopsis-details/synopsis-details.component';
+import { RemoveFavoriteDetailsComponent } from './remove-favorite-details/remove-favorite-details.component';
+import { AddFavoriteDetailsComponent } from './add-favorite-details/add-favorite-details.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 const appRoutes: Routes = [
@@ -32,7 +40,13 @@ const appRoutes: Routes = [
     UserRegistrationFormComponent,
     UserLoginFormComponent,
     MovieCardComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    GenreDetailsComponent,
+    DirectorDetailsComponent,
+    SynopsisDetailsComponent,
+    RemoveFavoriteDetailsComponent,
+    AddFavoriteDetailsComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +61,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatSnackBarModule,
     MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

@@ -127,18 +127,17 @@ export class FetchApiDataService {
   }
 
 
-  //***Making the api call to the endpoint which POST user's new favorite movie.
   userAddFavoriteMovie(Username: string, MovieID: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.post(apiUrl + 'users/' + Username + '/movies/' + MovieID, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + token,
+    });
+    const requestBody = {};
+    return this.http.post(apiUrl + 'users/' + Username + '/movies/' + MovieID, requestBody, { headers })
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
   }
 
 
