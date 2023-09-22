@@ -5,33 +5,42 @@ import { GenreDetailsComponent } from '../genre-details/genre-details.component'
 import { DirectorDetailsComponent } from '../director-details/director-details.component';
 import { SynopsisDetailsComponent } from '../synopsis-details/synopsis-details.component';
 
+
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
+
+
 export class MovieCardComponent {
   movies: any[] = [];
   loggedInUser: string = '';
+  favoriteButtonStates: { [movieId: string]: boolean } = {};
+
 
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog
   ) { }
 
+
   ngOnInit(): void {
     this.getMovies();
   }
 
+
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
+      this.movies.forEach((movie) => {
+        this.favoriteButtonStates[movie._id] = false;
+      });
       console.log(this.movies);
       return this.movies;
     });
   }
 
-  favoriteButtonState: boolean = false;
 
   retrieveUsernameFromLocalStorage(): string {
     const userDataString = localStorage.getItem('user');
@@ -41,14 +50,36 @@ export class MovieCardComponent {
     }
     return '';
   }
-  addToFavorite(Username: string, MovieID: string): void {
+
+
+  addToFavorite(MovieID: string): void {
     const loggedInUsername = this.retrieveUsernameFromLocalStorage();
-    this.fetchApiData.userAddFavoriteMovie(loggedInUsername, MovieID).subscribe((resp: any) => {
-      console.log(resp);
-    });
+    this.fetchApiData.userAddFavoriteMovie(loggedInUsername, MovieID).subscribe(
+      (resp: any) => {
+        console.log(resp);
+        this.favoriteButtonStates[MovieID] = true;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
-  
+
+  removeFromFavorite(MovieID: string): void {
+    const loggedInUsername = this.retrieveUsernameFromLocalStorage();
+    this.fetchApiData.userDeleteFavoriteMovie(loggedInUsername, MovieID).subscribe(
+      (resp: any) => {
+        console.log(resp);
+        this.favoriteButtonStates[MovieID] = false;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+
   openGenreDialogue(genre: any): void {
     this.dialog.open(GenreDetailsComponent, {
       data: {
