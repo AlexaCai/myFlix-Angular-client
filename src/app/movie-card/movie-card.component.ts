@@ -12,6 +12,8 @@ import { SynopsisDetailsComponent } from '../synopsis-details/synopsis-details.c
 })
 export class MovieCardComponent {
   movies: any[] = [];
+  loggedInUser: string = '';
+
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog
@@ -29,6 +31,24 @@ export class MovieCardComponent {
     });
   }
 
+  favoriteButtonState: boolean = false;
+
+  retrieveUsernameFromLocalStorage(): string {
+    const userDataString = localStorage.getItem('user');
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      return userData.Username;
+    }
+    return '';
+  }
+  addToFavorite(Username: string, MovieID: string): void {
+    const loggedInUsername = this.retrieveUsernameFromLocalStorage();
+    this.fetchApiData.userAddFavoriteMovie(loggedInUsername, MovieID).subscribe((resp: any) => {
+      console.log(resp);
+    });
+  }
+
+  
   openGenreDialogue(genre: any): void {
     this.dialog.open(GenreDetailsComponent, {
       data: {
@@ -38,7 +58,7 @@ export class MovieCardComponent {
     });
   }
 
-  
+
   openDirectorDialogue(director: any): void {
     this.dialog.open(DirectorDetailsComponent, {
       data: {
@@ -58,4 +78,6 @@ export class MovieCardComponent {
       }
     });
   }
+
+
 }
