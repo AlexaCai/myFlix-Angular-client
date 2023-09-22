@@ -8,11 +8,38 @@
 </head>
 
 <body>
+    <app-navigation-bar></app-navigation-bar>
     <div>
         <h1>User Profile</h1>
+        <h3>User information</h3>
         <p>Name: {{ userInfo.Username }}</p>
         <p>Email: {{ userInfo.Email }}</p>
-        <p>Favorite movies:</p>
+        <h3>Edit information</h3>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Birthday</mat-label>
+                <input matInput placeholder="">
+            </mat-form-field>
+        </form>
+        <h3>Delete information</h3>
+        <section>
+            <div class="example-button-row">
+                <button (click)="deleteAccount()" mat-raised-button color="warn">Delete account</button>
+            </div>
+          </section>
+        <h3>Favorite movies:</h3>
         <div *ngFor="let movie of userInfo.FavoriteMovies">
             <div>
                 <p>{{ movie.Title }}</p>
