@@ -196,13 +196,13 @@ export class FetchApiDataService {
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-      console.error('Client-side error occurred:', error.error.message);
+      console.error('Some error occurred:', error.error.message);
     } else {
       console.error(
-        `Server-side error: Status code ${error.status}, ` +
-        `Error body is: ${JSON.stringify(error.error)}`); // Convert error.error to a string for better logging.
+        `Error Status code ${error.status}, ` +
+        `Error body is: ${error.error}`);
     }
-    return throwError(error); // Return the error to be handled in the component.
+    return throwError(
+      'Action failed.');
   }
-
 }
