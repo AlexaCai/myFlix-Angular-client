@@ -22,6 +22,9 @@ import { DirectorDetailsComponent } from './director-details/director-details.co
 import { SynopsisDetailsComponent } from './synopsis-details/synopsis-details.component';
 import { RemoveFavoriteDetailsComponent } from './remove-favorite-details/remove-favorite-details.component';
 import { AddFavoriteDetailsComponent } from './add-favorite-details/add-favorite-details.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 const appRoutes: Routes = [
@@ -42,7 +45,8 @@ const appRoutes: Routes = [
     DirectorDetailsComponent,
     SynopsisDetailsComponent,
     RemoveFavoriteDetailsComponent,
-    AddFavoriteDetailsComponent
+    AddFavoriteDetailsComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatSnackBarModule,
     MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
