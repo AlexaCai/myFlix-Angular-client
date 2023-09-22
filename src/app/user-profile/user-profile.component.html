@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h1>User Profile</h1>
+        <p>Name: {{ userInfo.Username }}</p>
+        <p>Email: {{ userInfo.Email }}</p>
+        <p>Favorite movies:</p>
+        <div *ngFor="let movie of userInfo.FavoriteMovies">
+            <div>
+                <p>{{ movie.Title }}</p>
+                <p>Directed by: {{movie.Director?.Name}}</p>
+                <img [src]="movie.ImagePath" [alt]="movie.Title" />
+            </div>
+            <button (click)="removeFromFavorite(movie._id)">remove from favorite</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
