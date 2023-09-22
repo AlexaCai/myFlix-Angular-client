@@ -157,7 +157,7 @@ export class FetchApiDataService {
 
 
   //***Making the api call to the endpoint which UPDATE user info.
-  updateUser(Username: string, MovieID: string): Observable<any> {
+  updateUser(Username: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.put(apiUrl + 'users/' + Username, {
       headers: new HttpHeaders(
@@ -172,13 +172,14 @@ export class FetchApiDataService {
 
 
   //***Making the api call to the endpoint which DELETE user account.
-  deleteUser(Username: string, MovieID: string): Observable<any> {
+  deleteUser(Username: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.delete(apiUrl + 'users/' + Username, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
-        })
+        }),
+      responseType: 'text',
     }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
@@ -195,13 +196,13 @@ export class FetchApiDataService {
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
+      console.error('Client-side error occurred:', error.error.message);
     } else {
       console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
+        `Server-side error: Status code ${error.status}, ` +
+        `Error body is: ${JSON.stringify(error.error)}`); // Convert error.error to a string for better logging.
     }
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError(error); // Return the error to be handled in the component.
   }
+
 }
