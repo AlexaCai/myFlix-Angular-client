@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { GenreDetailsComponent } from '../genre-details/genre-details.component';
 import { DirectorDetailsComponent } from '../director-details/director-details.component';
 import { SynopsisDetailsComponent } from '../synopsis-details/synopsis-details.component';
+import { AddFavoriteDetailsComponent } from '../add-favorite-details/add-favorite-details.component';
+import { RemoveFavoriteDetailsComponent } from '../remove-favorite-details/remove-favorite-details.component';
 
 
 @Component({
@@ -110,5 +112,22 @@ export class MovieCardComponent {
     });
   }
 
+
+  openAddToFavoriteDialogue(Title: any): void {
+    this.dialog.open(AddFavoriteDetailsComponent, {
+      data: {
+        Title: Title
+      }
+    });
+  }
+
+
+  openRemoveFromFavoriteDialogue(Title: any): void {
+    this.dialog.open(RemoveFavoriteDetailsComponent, {
+      data: {
+        Title: Title
+      }
+    });
+  }
 
 }

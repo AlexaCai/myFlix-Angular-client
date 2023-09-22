@@ -18,15 +18,17 @@
             <mat-card-actions>
                 <button (click)="openGenreDialogue(movie.Genre)" mat-button color="primary">
                     Genre
-                </button>                
+                </button>
                 <button (click)="openDirectorDialogue(movie.Director)" mat-button color="primary">
                     Director
                 </button>
                 <button (click)="openSynopsisDialogue(movie.Description)" mat-button color="primary">
                     Synopsis
                 </button>
-                <mat-icon *ngIf="!favoriteButtonStates[movie._id]" (click)="addToFavorite(movie._id)">favorite_border</mat-icon>
-                <mat-icon *ngIf="favoriteButtonStates[movie._id]" (click)="removeFromFavorite(movie._id)">favorite</mat-icon>                
+                <mat-icon *ngIf="!favoriteButtonStates[movie._id]"
+                    (click)="addToFavorite(movie._id); openAddToFavoriteDialogue(movie.Title)">favorite_border</mat-icon>
+                <mat-icon *ngIf="favoriteButtonStates[movie._id]"
+                    (click)="removeFromFavorite(movie._id); openRemoveFromFavoriteDialogue(movie.Title) ">favorite</mat-icon>
             </mat-card-actions>
         </mat-card>
     </div>
