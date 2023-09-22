@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class UserProfileComponent implements OnInit {
 
 
   constructor(
-    public fetchApiData: FetchApiDataService
+    public fetchApiData: FetchApiDataService,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -53,7 +55,7 @@ export class UserProfileComponent implements OnInit {
       this.userInfo.FavoriteMovies = favoriteMovies;
     });
   }
-  
+
 
   loadFavoriteButtonStates(): void {
     const loggedInUsername = this.retrieveUsernameFromLocalStorage();
@@ -69,7 +71,7 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-  
+
   retrieveUsernameFromLocalStorage(): string {
     const userDataString = localStorage.getItem('user');
     if (userDataString) {
@@ -87,14 +89,28 @@ export class UserProfileComponent implements OnInit {
         const updatedMovieIds = this.userInfo.FavoriteMovies
           .filter((movie: any) => movie._id !== MovieID)
           .map((movie: any) => movie._id);
-          this.fetchFavoriteMovies(updatedMovieIds);
+        this.fetchFavoriteMovies(updatedMovieIds);
       },
       (error) => {
         console.error(error);
       }
     );
   }
-  
-}
 
+
+  deleteAccount(): void {
+    if (this.loggedInUsername) {
+      this.fetchApiData.deleteUser(this.loggedInUsername).subscribe(
+        () => {
+          localStorage.removeItem('User');
+          localStorage.removeItem('Token');
+          this.router.navigate(['welcome']);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+}
 
