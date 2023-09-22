@@ -15,6 +15,7 @@ export class NavigationBarComponent {
 
 
   Logout(): void {
+    localStorage.removeItem('User');
     this.router.navigate(['welcome']);
   }
 }
