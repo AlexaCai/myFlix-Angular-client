@@ -29,6 +29,7 @@ export class MovieCardComponent {
 
   ngOnInit(): void {
     this.getMovies();
+    this.loadFavoriteButtonStates();
   }
 
 
@@ -36,14 +37,30 @@ export class MovieCardComponent {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       this.movies.forEach((movie) => {
-        this.favoriteButtonStates[movie._id] = false;
       });
       console.log(this.movies);
       return this.movies;
     });
   }
 
+  
+  loadFavoriteButtonStates(): void {
+    const favoriteStatesString = localStorage.getItem('favoriteButtonStates');
+    if (favoriteStatesString) {
+      this.favoriteButtonStates = JSON.parse(favoriteStatesString);
+    }
+  }
 
+
+  updateFavoriteButtonState(movieId: string, isFavorite: boolean): void {
+    this.favoriteButtonStates[movieId] = isFavorite;
+    localStorage.setItem(
+      'favoriteButtonStates',
+      JSON.stringify(this.favoriteButtonStates)
+    );
+  }
+
+  
   retrieveUsernameFromLocalStorage(): string {
     const userDataString = localStorage.getItem('user');
     if (userDataString) {
@@ -59,6 +76,7 @@ export class MovieCardComponent {
     this.fetchApiData.userAddFavoriteMovie(loggedInUsername, MovieID).subscribe(
       (resp: any) => {
         console.log(resp);
+        this.updateFavoriteButtonState(MovieID, true);
         this.favoriteButtonStates[MovieID] = true;
       },
       (error) => {
@@ -73,6 +91,7 @@ export class MovieCardComponent {
     this.fetchApiData.userDeleteFavoriteMovie(loggedInUsername, MovieID).subscribe(
       (resp: any) => {
         console.log(resp);
+        this.updateFavoriteButtonState(MovieID, false); // Set as favorite
         this.favoriteButtonStates[MovieID] = false;
       },
       (error) => {
