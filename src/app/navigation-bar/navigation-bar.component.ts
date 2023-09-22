@@ -23,4 +23,8 @@ export class NavigationBarComponent {
     this.router.navigate(['user-profile']);
   }
 
+  moviesPage(): void {
+    this.router.navigate(['movies']);
+  }
+
 }
