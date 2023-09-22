@@ -18,4 +18,9 @@ export class NavigationBarComponent {
     localStorage.removeItem('User');
     this.router.navigate(['welcome']);
   }
+
+  userProfilePage(): void {
+    this.router.navigate(['user-profile']);
+  }
+
 }
