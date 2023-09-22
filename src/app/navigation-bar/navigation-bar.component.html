@@ -1,0 +1,11 @@
+<mat-toolbar>
+    <span class="flex-spacer app-title">
+        <a class="custom-link" href="../movie-card/movie-card.component.html">myFlix</a>
+    </span>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>Home</button>
+        <button mat-menu-item>Profile</button>
+        <button (click)="Logout()" mat-menu-item>Logout</button>
+    </mat-menu>
+    <button class="menu-button" mat-button [matMenuTriggerFor]="menu">Menu</button>
+</mat-toolbar>
