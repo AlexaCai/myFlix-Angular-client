@@ -26,6 +26,8 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 const appRoutes: Routes = [
@@ -66,6 +68,8 @@ const appRoutes: Routes = [
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
