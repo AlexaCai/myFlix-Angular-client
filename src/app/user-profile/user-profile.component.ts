@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
 import { Router } from '@angular/router';
+import { GenreDetailsComponent } from '../genre-details/genre-details.component';
+import { DirectorDetailsComponent } from '../director-details/director-details.component';
+import { SynopsisDetailsComponent } from '../synopsis-details/synopsis-details.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 
 @Component({
@@ -24,7 +29,8 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public router: Router
+    public router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +66,38 @@ export class UserProfileComponent implements OnInit {
       this.userInfo.FavoriteMovies = favoriteMovies;
     });
   }
+
+
+  openGenreDialogue(genre: any): void {
+    this.dialog.open(GenreDetailsComponent, {
+      data: {
+        Name: genre.Name,
+        Description: genre.Description,
+      }
+    });
+  }
+
+
+  openDirectorDialogue(director: any): void {
+    this.dialog.open(DirectorDetailsComponent, {
+      data: {
+        Name: director.Name,
+        Bio: director.Bio,
+        Birth: director.Birth,
+        Death: director.Death
+      }
+    });
+  }
+
+
+  openSynopsisDialogue(Description: any): void {
+    this.dialog.open(SynopsisDetailsComponent, {
+      data: {
+        Description: Description
+      }
+    });
+  }
+
 
 
   loadFavoriteButtonStates(): void {
