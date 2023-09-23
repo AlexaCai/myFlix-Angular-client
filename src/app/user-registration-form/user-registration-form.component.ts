@@ -12,6 +12,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UserRegistrationFormComponent implements OnInit {
 
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
+  showSignUpErrorPrompt1 = false;
+  showSignUpErrorPrompt2 = false;
+  updateErrorMessage: string = '';
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -20,6 +23,12 @@ export class UserRegistrationFormComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  myFilter = (d: Date | null): boolean => {
+    const today = new Date();
+    const selectedDate = d || new Date();
+    return selectedDate <= today;
+  };
 
   //***This is the function responsible for sending the form inputs to the backend
   registerUser(): void {
@@ -30,12 +39,23 @@ export class UserRegistrationFormComponent implements OnInit {
       this.snackBar.open('User registered sucessfully!', 'OK', {
         duration: 2000
       });
-    }, (response) => {
-      console.log(response)
-      this.snackBar.open(response, 'OK', {
-        duration: 2000
-      });
-    });
+    }, (error) => {
+      console.error(error);
+      console.log(error.message);
+      if (error.status === 422) {
+        this.showSignUpErrorPrompt1 = true;
+      } else if (error.status === 409) {
+        this.showSignUpErrorPrompt2 = true;
+        this.updateErrorMessage = error.message;
+      }
+    }
+    );
   }
+
+  closeSignUpErrorPrompt(): void {
+    this.showSignUpErrorPrompt1 = false;
+    this.showSignUpErrorPrompt2 = false;
+  }
+
 
 }

@@ -23,7 +23,10 @@ export class FetchApiDataService {
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe(
-      catchError(this.handleError)
+      catchError((error) => {
+        //***Return the error response as an object with status and message properties (used to display during update if user try to use a username or email already used by someone else).
+        return throwError({ status: error.status, message: error.error });
+      })
     );
   }
 
