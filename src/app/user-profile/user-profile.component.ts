@@ -7,12 +7,12 @@ import { SynopsisDetailsComponent } from '../synopsis-details/synopsis-details.c
 import { MatDialog } from '@angular/material/dialog';
 
 
-
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
+
 
 export class UserProfileComponent implements OnInit {
   userInfo: any = {};
@@ -33,6 +33,7 @@ export class UserProfileComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
+
   ngOnInit(): void {
     const userString = localStorage.getItem('user');
     if (userString) {
@@ -45,6 +46,15 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+
+  //***Use to ensure users cannot select birthday later than the current day.
+  myFilter = (d: Date | null): boolean => {
+    const today = new Date();
+    const selectedDate = d || new Date();
+    return selectedDate <= today;
+  };
+  
+
   fetchUserInfo(): void {
     if (this.loggedInUsername) {
       this.fetchApiData.getUserInfo(this.loggedInUsername).subscribe((resp: any) => {
@@ -54,6 +64,7 @@ export class UserProfileComponent implements OnInit {
       });
     }
   }
+
 
   fetchFavoriteMovies(movieIds: string[]): void {
     this.fetchApiData.getAllMovies().subscribe((movies: any[]) => {
@@ -99,6 +110,15 @@ export class UserProfileComponent implements OnInit {
   }
 
 
+  retrieveUsernameFromLocalStorage(): string {
+    const userDataString = localStorage.getItem('user');
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      return userData.Username;
+    }
+    return '';
+  }
+
 
   loadFavoriteButtonStates(): void {
     const loggedInUsername = this.retrieveUsernameFromLocalStorage();
@@ -114,15 +134,6 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-
-  retrieveUsernameFromLocalStorage(): string {
-    const userDataString = localStorage.getItem('user');
-    if (userDataString) {
-      const userData = JSON.parse(userDataString);
-      return userData.Username;
-    }
-    return '';
-  }
 
   removeFromFavorite(MovieID: string): void {
     const loggedInUsername = this.retrieveUsernameFromLocalStorage();
@@ -140,31 +151,6 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-
-  openDeleteConfirmationDialog(): void {
-    this.showDeleteCustomPrompt = true;
-  }
-  confirmDelete(): void {
-    this.deleteAccount();
-    this.showDeleteCustomPrompt = false;
-  }
-  cancelDelete(): void {
-    this.showDeleteCustomPrompt = false;
-  }
-  deleteAccount(): void {
-    if (this.loggedInUsername) {
-      this.fetchApiData.deleteUser(this.loggedInUsername).subscribe(
-        () => {
-          localStorage.removeItem('User');
-          localStorage.removeItem('Token');
-          this.router.navigate(['welcome']);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    }
-  }
 
   openUpdateConfirmationDialog(): void {
     this.showUpdateCustomPrompt = true;
@@ -197,10 +183,34 @@ export class UserProfileComponent implements OnInit {
         }
     )}
   }
-
   closeUpdateErrorPrompt(): void {
     this.showUpdateErrorPrompt = false;
   }
 
+
+  openDeleteConfirmationDialog(): void {
+    this.showDeleteCustomPrompt = true;
+  }
+  confirmDelete(): void {
+    this.deleteAccount();
+    this.showDeleteCustomPrompt = false;
+  }
+  cancelDelete(): void {
+    this.showDeleteCustomPrompt = false;
+  }
+  deleteAccount(): void {
+    if (this.loggedInUsername) {
+      this.fetchApiData.deleteUser(this.loggedInUsername).subscribe(
+        () => {
+          localStorage.removeItem('User');
+          localStorage.removeItem('Token');
+          this.router.navigate(['welcome']);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
 }
 
