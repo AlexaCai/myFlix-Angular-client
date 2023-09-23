@@ -10,10 +10,13 @@
 <body>
     <app-navigation-bar></app-navigation-bar>
     <div>
+
         <h1>User Profile</h1>
+
         <h3>User information</h3>
         <p>Name: {{ userInfo.Username }}</p>
         <p>Email: {{ userInfo.Email }}</p>
+
         <h3>Edit information</h3>
         <form class="example-form">
             <mat-form-field class="example-full-width">
@@ -33,15 +36,55 @@
                 <input matInput placeholder="" [(ngModel)]="birthday" name="birthday">
             </mat-form-field>
             <div class="example-button-row">
-                <button (click)="updateAccount()" mat-raised-button color="primary">Update</button>
+                <button (click)="openUpdateConfirmationDialog()" mat-raised-button color="primary">Update</button>
+            </div>
+            <div id="customUpdatePrompt" class="custom-prompt" [ngClass]="{ 'show': showUpdateCustomPrompt }">
+                <div class="custom-prompt-content">
+                    <h1 mat-dialog-title>Update account</h1>
+                    <div mat-dialog-content>
+                        Are you sure you want to update your account?
+                    </div>
+                    <div mat-dialog-content>
+                        <button (click)="cancelUpdate()" mat-button mat-dialog>Cancel</button>
+                        <button (click)="confirmUpdate()" mat-button mat-dialog>Confirm</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div id="customUpdateErrorPrompt" class="custom-update-error-prompt"
+                        [ngClass]="{ 'show': showUpdateErrorPrompt }">
+                        <div class="custom-update-error-prompt-content">
+                            <p>An error occurred while updating your account. Please try again later and make sure to
+                                follow the directives under each field.</p>
+                            <button (click)="closeUpdateErrorPrompt()">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
+
+
         <h3>Delete information</h3>
         <section>
             <div class="example-button-row">
-                <button (click)="deleteAccount()" mat-raised-button color="warn">Delete account</button>
+                <button (click)="openDeleteConfirmationDialog()" mat-raised-button color="warn">Delete account</button>
             </div>
-          </section>
+            <div id="customDeletePrompt" class="custom-prompt" [ngClass]="{ 'show': showDeleteCustomPrompt }">
+                <div class="custom-prompt-content">
+                    <h1 mat-dialog-title>Delete account</h1>
+                    <div mat-dialog-content>
+                        Are you sure you want to delete your account? This action is irreversible.
+                    </div>
+                    <div mat-dialog-actions>
+                        <button (click)="cancelDelete()" mat-button mat-dialog>Cancel</button>
+                        <button (click)="confirmDelete()" mat-button mat-dialog>Delete</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <h3>Favorite movies:</h3>
         <div *ngFor="let movie of userInfo.FavoriteMovies">
             <div>

@@ -3,7 +3,6 @@ import { FetchApiDataService } from '../fetch-api-data.service'
 import { Router } from '@angular/router';
 
 
-
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -18,6 +17,10 @@ export class UserProfileComponent implements OnInit {
   password: string = '';
   email: string = '';
   birthday: string = '';
+  showDeleteCustomPrompt = false;
+  showUpdateCustomPrompt = false;
+  showUpdateErrorPrompt = false;
+
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -41,14 +44,12 @@ export class UserProfileComponent implements OnInit {
       this.fetchApiData.getUserInfo(this.loggedInUsername).subscribe((resp: any) => {
         this.userInfo = resp;
         console.log(this.userInfo);
-        // Fetch favorite movies directly from the API based on movie titles
         this.fetchFavoriteMovies(this.userInfo.FavoriteMovies);
       });
     }
   }
 
   fetchFavoriteMovies(movieIds: string[]): void {
-    // Fetch all movies
     this.fetchApiData.getAllMovies().subscribe((movies: any[]) => {
       const favoriteMovies: any[] = [];
       movies.forEach((movie) => {
@@ -102,6 +103,16 @@ export class UserProfileComponent implements OnInit {
   }
 
 
+  openDeleteConfirmationDialog(): void {
+    this.showDeleteCustomPrompt = true;
+  }
+  confirmDelete(): void {
+    this.deleteAccount();
+    this.showDeleteCustomPrompt = false;
+  }
+  cancelDelete(): void {
+    this.showDeleteCustomPrompt = false;
+  }
   deleteAccount(): void {
     if (this.loggedInUsername) {
       this.fetchApiData.deleteUser(this.loggedInUsername).subscribe(
@@ -117,6 +128,16 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  openUpdateConfirmationDialog(): void {
+    this.showUpdateCustomPrompt = true;
+  }
+  confirmUpdate(): void {
+    this.updateAccount();
+    this.showUpdateCustomPrompt = false;
+  }
+  cancelUpdate(): void {
+    this.showUpdateCustomPrompt = false;
+  }
   updateAccount(): void {
     if (this.loggedInUsername) {
       const userData = {
@@ -127,19 +148,21 @@ export class UserProfileComponent implements OnInit {
       };
       this.fetchApiData.updateUser(this.loggedInUsername, userData).subscribe(
         (response) => {
-          console.log(response); 
+          console.log(response);
           localStorage.removeItem('User');
           localStorage.removeItem('Token');
           this.router.navigate(['welcome']);
         },
         (error) => {
           console.error(error);
+          this.showUpdateErrorPrompt = true;
         }
-      );
-    }
+    )}
   }
-  
-  
+
+  closeUpdateErrorPrompt(): void {
+    this.showUpdateErrorPrompt = false;
+  }
 
 }
 
