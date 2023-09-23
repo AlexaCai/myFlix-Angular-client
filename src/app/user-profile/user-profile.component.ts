@@ -24,7 +24,10 @@ export class UserProfileComponent implements OnInit {
   birthday: string = '';
   showDeleteCustomPrompt = false;
   showUpdateCustomPrompt = false;
-  showUpdateErrorPrompt = false;
+  showUpdateErrorPrompt1 = false;
+  showUpdateErrorPrompt2 = false;
+  updateErrorMessage: string = '';
+
 
 
   constructor(
@@ -163,6 +166,7 @@ export class UserProfileComponent implements OnInit {
     this.showUpdateCustomPrompt = false;
   }
   updateAccount(): void {
+    console.log("updateAccount method called"); // Add this line for debugging
     if (this.loggedInUsername) {
       const userData = {
         Username: this.username,
@@ -172,19 +176,26 @@ export class UserProfileComponent implements OnInit {
       };
       this.fetchApiData.updateUser(this.loggedInUsername, userData).subscribe(
         (response) => {
-          console.log(response);
           localStorage.removeItem('User');
           localStorage.removeItem('Token');
           this.router.navigate(['welcome']);
         },
         (error) => {
           console.error(error);
-          this.showUpdateErrorPrompt = true;
+          console.log(error.message);
+          if (error.status === 422) {
+            this.showUpdateErrorPrompt1 = true;
+          } else if (error.status === 409) {
+            this.showUpdateErrorPrompt2 = true;
+            this.updateErrorMessage = error.message;
+          }
         }
-    )}
+      );
+    }
   }
   closeUpdateErrorPrompt(): void {
-    this.showUpdateErrorPrompt = false;
+    this.showUpdateErrorPrompt1 = false;
+    this.showUpdateErrorPrompt2 = false;
   }
 
 
