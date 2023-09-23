@@ -164,12 +164,13 @@ export class FetchApiDataService {
         Authorization: 'Bearer ' + token,
       })
     }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
+      catchError((error) => {
+        //***Return the error response as an object with status and message properties (used to display during update if user try to use a username or email already used by someone else).
+        return throwError({ status: error.status, message: error.error });
+      })
     );
   }
-  
-  
+
 
 
   //***Making the api call to the endpoint which DELETE user account.
