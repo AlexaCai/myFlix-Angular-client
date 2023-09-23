@@ -11,34 +11,45 @@
     <app-navigation-bar></app-navigation-bar>
     <div>
 
+
         <h1>User Profile</h1>
 
+
+        <!-- User current info section -->
         <h3>User information</h3>
         <p>Name: {{ userInfo.Username }}</p>
         <p>Email: {{ userInfo.Email }}</p>
 
+
+        <!-- User update account section -->
         <h3>Edit information</h3>
         <form class="example-form">
             <mat-form-field subscriptSizing="dynamic" class="input-width">
                 <mat-label>Username</mat-label>
                 <input matInput placeholder="" [(ngModel)]="username" name="username">
-                <mat-hint class="input-hint">Username must be at least 5 characters long and contain only alphanumerical characters.
+                <mat-hint class="input-hint">Username must be at least 5 characters long and contain only alphanumerical
+                    characters.
                 </mat-hint>
             </mat-form-field>
             <mat-form-field subscriptSizing="dynamic" class="input-width">
                 <mat-label>Password</mat-label>
                 <input matInput placeholder="" [(ngModel)]="password" name="password">
-                <mat-hint class="input-hint">Password can contain alphanumeric and non-alphanumeric characters. </mat-hint>
+                <mat-hint class="input-hint">Password can contain alphanumeric and non-alphanumeric characters.
+                </mat-hint>
             </mat-form-field>
             <mat-form-field subscriptSizing="dynamic" class="input-width">
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="abc@domain.abc" [(ngModel)]="email" name="email">
                 <mat-hint class="input-hint">Email must be in the following format : abc@domain.abc. </mat-hint>
             </mat-form-field>
-            <mat-form-field subscriptSizing="dynamic" class="input-width">
+            <mat-form-field class="example-full-width">
                 <mat-label>Birthday</mat-label>
-                <input matInput [(ngModel)]="birthday" type="date" placeholder="Birthday" name="Birthday">
-                <mat-hint class="input-hint">Birthday is optional.</mat-hint>
+                <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" [(ngModel)]="birthday" name="birthday" placeholder="Use calendar"
+                    [readonly]="true">
+                <mat-hint class="input-hint">Birthday is optional. If you want to add it, pick your birthday from the
+                    calendar icon.</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
         </form>
         <div class="example-button-row">
@@ -70,7 +81,7 @@
         </div>
 
 
-
+        <!-- User delete account section -->
         <h3>Delete information</h3>
         <section>
             <div class="example-button-row">
@@ -91,28 +102,29 @@
         </section>
 
 
+        <!-- User favorite movies section -->
         <h3>Favorite movies:</h3>
         <div style="display: flex;">
-        <mat-card *ngFor="let movie of userInfo.FavoriteMovies">
-            <mat-card-header>
-                <mat-card-title>{{movie.Title}}</mat-card-title>
-                <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
-            </mat-card-header>
-            <img src={{movie.ImagePath}} alt={{movie.Title}} />
-            <mat-card-actions>
-                <button (click)="openGenreDialogue(movie.Genre)" mat-button color="primary">
-                    Genre
-                </button>
-                <button (click)="openDirectorDialogue(movie.Director)" mat-button color="primary">
-                    Director
-                </button>
-                <button (click)="openSynopsisDialogue(movie.Description)" mat-button color="primary">
-                    Synopsis
-                </button>
-            </mat-card-actions>
-            <button (click)="removeFromFavorite(movie._id)">remove from favorite</button>
-        </mat-card>
-    </div>
+            <mat-card *ngFor="let movie of userInfo.FavoriteMovies">
+                <mat-card-header>
+                    <mat-card-title>{{movie.Title}}</mat-card-title>
+                    <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+                </mat-card-header>
+                <img src={{movie.ImagePath}} alt={{movie.Title}} />
+                <mat-card-actions>
+                    <button (click)="openGenreDialogue(movie.Genre)" mat-button color="primary">
+                        Genre
+                    </button>
+                    <button (click)="openDirectorDialogue(movie.Director)" mat-button color="primary">
+                        Director
+                    </button>
+                    <button (click)="openSynopsisDialogue(movie.Description)" mat-button color="primary">
+                        Synopsis
+                    </button>
+                </mat-card-actions>
+                <button (click)="removeFromFavorite(movie._id)">remove from favorite</button>
+            </mat-card>
+        </div>
     </div>
 
 </body>
