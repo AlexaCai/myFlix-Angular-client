@@ -25,11 +25,13 @@ import { AddFavoriteDetailsComponent } from './add-favorite-details/add-favorite
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
+  { path: 'user-profile', component: UserProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -46,7 +48,8 @@ const appRoutes: Routes = [
     SynopsisDetailsComponent,
     RemoveFavoriteDetailsComponent,
     AddFavoriteDetailsComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

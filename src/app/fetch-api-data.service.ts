@@ -157,28 +157,30 @@ export class FetchApiDataService {
 
 
   //***Making the api call to the endpoint which UPDATE user info.
-  updateUser(Username: string, MovieID: string): Observable<any> {
+  updateUser(Username: string, userData: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + 'users/' + Username, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        })
+    return this.http.put(apiUrl + 'users/' + Username, userData, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      })
     }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
+  
+  
 
 
   //***Making the api call to the endpoint which DELETE user account.
-  deleteUser(Username: string, MovieID: string): Observable<any> {
+  deleteUser(Username: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.delete(apiUrl + 'users/' + Username, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
-        })
+        }),
+      responseType: 'text',
     }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
@@ -202,6 +204,6 @@ export class FetchApiDataService {
         `Error body is: ${error.error}`);
     }
     return throwError(
-      'Something bad happened; please try again later.');
+      'Action failed.');
   }
 }

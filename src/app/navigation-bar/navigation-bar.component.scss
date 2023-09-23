@@ -7,10 +7,12 @@
     padding: 20px;
 }
 
-.custom-link {
-    text-decoration: none; 
-    color: black; 
-  }  
+.button-link {
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;  
+  }
 
 .menu-button {
     font-size: 20px;

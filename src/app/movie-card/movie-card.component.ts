@@ -45,18 +45,16 @@ export class MovieCardComponent {
 
   
   loadFavoriteButtonStates(): void {
-    const favoriteStatesString = localStorage.getItem('favoriteButtonStates');
-    if (favoriteStatesString) {
-      this.favoriteButtonStates = JSON.parse(favoriteStatesString);
-    }
-  }
-
-
-  updateFavoriteButtonState(movieId: string, isFavorite: boolean): void {
-    this.favoriteButtonStates[movieId] = isFavorite;
-    localStorage.setItem(
-      'favoriteButtonStates',
-      JSON.stringify(this.favoriteButtonStates)
+    const loggedInUsername = this.retrieveUsernameFromLocalStorage();
+    this.fetchApiData.getUserfavoriteMovies(loggedInUsername).subscribe(
+      (resp: any) => {
+        resp.forEach((movieId: string) => {
+          this.favoriteButtonStates[movieId] = true;
+        });
+      },
+      (error) => {
+        console.error(error);
+      }
     );
   }
 
@@ -76,7 +74,6 @@ export class MovieCardComponent {
     this.fetchApiData.userAddFavoriteMovie(loggedInUsername, MovieID).subscribe(
       (resp: any) => {
         console.log(resp);
-        this.updateFavoriteButtonState(MovieID, true);
         this.favoriteButtonStates[MovieID] = true;
       },
       (error) => {
@@ -91,7 +88,6 @@ export class MovieCardComponent {
     this.fetchApiData.userDeleteFavoriteMovie(loggedInUsername, MovieID).subscribe(
       (resp: any) => {
         console.log(resp);
-        this.updateFavoriteButtonState(MovieID, false); // Set as favorite
         this.favoriteButtonStates[MovieID] = false;
       },
       (error) => {
