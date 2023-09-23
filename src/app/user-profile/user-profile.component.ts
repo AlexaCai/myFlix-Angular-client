@@ -3,6 +3,7 @@ import { FetchApiDataService } from '../fetch-api-data.service'
 import { Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -13,7 +14,10 @@ export class UserProfileComponent implements OnInit {
   userInfo: any = {};
   loggedInUsername: any = {};
   favoriteButtonStates: { [movieId: string]: boolean } = {};
-
+  username: string = '';
+  password: string = '';
+  email: string = '';
+  birthday: string = '';
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -112,5 +116,30 @@ export class UserProfileComponent implements OnInit {
       );
     }
   }
+
+  updateAccount(): void {
+    if (this.loggedInUsername) {
+      const userData = {
+        Username: this.username,
+        Password: this.password,
+        Email: this.email,
+        Birthday: this.birthday
+      };
+      this.fetchApiData.updateUser(this.loggedInUsername, userData).subscribe(
+        (response) => {
+          console.log(response); 
+          localStorage.removeItem('User');
+          localStorage.removeItem('Token');
+          this.router.navigate(['welcome']);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+  
+  
+
 }
 

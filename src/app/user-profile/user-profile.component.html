@@ -18,20 +18,23 @@
         <form class="example-form">
             <mat-form-field class="example-full-width">
                 <mat-label>Username</mat-label>
-                <input matInput placeholder="">
+                <input matInput placeholder="" [(ngModel)]="username" name="username">
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="">
+                <input matInput placeholder="" [(ngModel)]="password" name="password">
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="">
+                <input matInput placeholder="" [(ngModel)]="email" name="email">
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Birthday</mat-label>
-                <input matInput placeholder="">
+                <input matInput placeholder="" [(ngModel)]="birthday" name="birthday">
             </mat-form-field>
+            <div class="example-button-row">
+                <button (click)="updateAccount()" mat-raised-button color="primary">Update</button>
+            </div>
         </form>
         <h3>Delete information</h3>
         <section>
