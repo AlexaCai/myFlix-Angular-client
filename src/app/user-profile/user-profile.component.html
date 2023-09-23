@@ -69,11 +69,22 @@
         </div>
         <div>
             <div>
-                <div id="customUpdateErrorPrompt" class="custom-update-error-prompt"
-                    [ngClass]="{ 'show': showUpdateErrorPrompt }">
+                <div id="customUpdateErrorPrompt1" class="custom-update-error-prompt"
+                    [ngClass]="{ 'show': showUpdateErrorPrompt1 }">
                     <div class="custom-update-error-prompt-content">
                         <p>An error occurred while updating your account. Please try again and make sure to
                             follow the directives under each field.</p>
+                        <button (click)="closeUpdateErrorPrompt()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div id="customUpdateErrorPrompt2" class="custom-update-error-prompt"
+                    [ngClass]="{ 'show': showUpdateErrorPrompt2 }">
+                    <div class="custom-update-error-prompt-content">
+                        <p>{{ updateErrorMessage }}</p>
                         <button (click)="closeUpdateErrorPrompt()">Close</button>
                     </div>
                 </div>
