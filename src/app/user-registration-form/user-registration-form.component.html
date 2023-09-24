@@ -10,7 +10,7 @@
 <body>
     <mat-card class="signup-form-content-position">
         <mat-card-header>
-            <mat-card-title class="card-title">Sign Up!</mat-card-title>
+            <mat-card-title class="card-title">Sign up!</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <form>
@@ -36,9 +36,7 @@
                     <mat-label>Birthday</mat-label>
                     <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker"
                         [(ngModel)]="userData.Birthday" name="birthday" placeholder="Use calendar" [readonly]="true">
-                    <mat-hint class="input-hint">Birthday is optional. If you want to add it, pick your birthday from
-                        the
-                        calendar icon.</mat-hint>
+                    <mat-hint class="input-hint">Birthday is optional. If you want to add it, pick your birthday from the calendar icon.</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -46,30 +44,32 @@
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button (click)="registerUser()" color="primary" class="form-signup-button">
-                Sign Up
+                Sign up
             </button>
         </mat-card-actions>
         <div>
             <div>
-                <div id="customSignUpErrorPrompt1" class="custom-signup-error-prompt"
+                <mat-card id="customSignUpErrorPrompt1" class="custom-signup-error-prompt"
                     [ngClass]="{ 'show': showSignUpErrorPrompt1 }">
                     <div class="custom-signup-error-prompt-content">
-                        <p>An error occurred while updating your account. Please try again and make sure to
-                            follow the directives under each field.</p>
-                        <button (click)="closeSignUpErrorPrompt()">Close</button>
+                        <mat-card-content>An error occurred while updating your account. Please try again and make sure
+                            to follow the directives under each field.</mat-card-content>
+                        <button (click)="closeSignUpErrorPrompt()" class="close-button" mat-raised-button
+                            color="primary">Close</button>
                     </div>
-                </div>
+                </mat-card>
             </div>
         </div>
         <div>
             <div>
-                <div id="customSignUpErrorPrompt2" class="custom-signup-error-prompt"
+                <mat-card id="customSignUpErrorPrompt2" class="custom-signup-error-prompt"
                     [ngClass]="{ 'show': showSignUpErrorPrompt2 }">
                     <div class="custom-signup-error-prompt-content">
-                        <p>{{ updateErrorMessage }}</p>
-                        <button (click)="closeSignUpErrorPrompt()">Close</button>
+                        <mat-card-content>{{ updateErrorMessage }}</mat-card-content>
+                        <button (click)="closeSignUpErrorPrompt()" class="close-button" mat-raised-button
+                            color="primary">Close</button>
                     </div>
-                </div>
+                </mat-card>
             </div>
         </div>
     </mat-card>
