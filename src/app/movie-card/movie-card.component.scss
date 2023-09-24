@@ -1,8 +1,22 @@
+.content {
+  justify-content: center;
+}
+
+.overflow-container {
+  overflow-x: hidden; 
+  overflow-y: hidden; 
+}
+
 .card-header-content {
   text-align: center;
   width: 100%;
   display: inline-block;
   padding-bottom: 10px;
+}
+
+.movie-title {
+  font-weight: 550;
+  padding-bottom: 5px;
 }
 
 .card-action-content {
@@ -12,4 +26,7 @@
     height: 100%; 
 }
 
+.favorite-icon {
+  color: rgba(63, 81, 181, 0.8)
+}
 

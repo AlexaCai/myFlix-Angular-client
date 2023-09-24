@@ -9,135 +9,179 @@
 
 <body>
     <app-navigation-bar></app-navigation-bar>
-    <div>
 
+    <h1 class="title-centered">User profile</h1>
 
-        <h1>User Profile</h1>
+    <mat-grid-list [cols]="columnNum" rowHeight="350px">
 
 
         <!-- User current info section -->
-        <h3>User information</h3>
-        <p>Name: {{ userInfo.Username }}</p>
-        <p>Email: {{ userInfo.Email }}</p>
+        <mat-grid-tile>
+            <div class="position-centered">
+                <h3 class="section-title">User information</h3>
+                <p> <strong>Name:</strong> {{ userInfo.Username }} <br> <strong>Email:</strong> {{ userInfo.Email }}</p>
+                <p class="user-information">If you want to update your information, please fill in the update form.</p>
+                <p class="user-information">All fields must be completed. If you only want to change some information,
+                    enter your current information you want to keep in the corresponding field (e.g. username) along
+                    with the information you want to change in the other field(s).</p>
+            </div>
+        </mat-grid-tile>
 
 
         <!-- User update account section -->
-        <h3>Edit information</h3>
-        <form class="example-form">
-            <mat-form-field subscriptSizing="dynamic" class="input-width">
-                <mat-label>Username</mat-label>
-                <input matInput placeholder="" [(ngModel)]="username" name="username">
-                <mat-hint class="input-hint">Username must be at least 5 characters long and contain only alphanumerical
-                    characters.
-                </mat-hint>
-            </mat-form-field>
-            <mat-form-field subscriptSizing="dynamic" class="input-width">
-                <mat-label>Password</mat-label>
-                <input matInput placeholder="" [(ngModel)]="password" name="password" type="password">
-                <mat-hint class="input-hint">Password can contain alphanumeric and non-alphanumeric characters.
-                </mat-hint>
-            </mat-form-field>
-            <mat-form-field subscriptSizing="dynamic" class="input-width">
-                <mat-label>Email</mat-label>
-                <input matInput placeholder="abc@domain.abc" [(ngModel)]="email" name="email">
-                <mat-hint class="input-hint">Email must be in the following format : abc@domain.abc. </mat-hint>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Birthday</mat-label>
-                <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" [(ngModel)]="birthday" name="birthday" placeholder="Use calendar"
-                    [readonly]="true">
-                <mat-hint class="input-hint">Birthday is optional. If you want to add it, pick your birthday from the
-                    calendar icon.</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </form>
-        <div class="example-button-row">
-            <button (click)="openUpdateConfirmationDialog()" mat-raised-button color="primary">Update</button>
-        </div>
-        <div id="customUpdatePrompt" class="custom-prompt" [ngClass]="{ 'show': showUpdateCustomPrompt }">
-            <div class="custom-prompt-content">
-                <h1 mat-dialog-title>Update account</h1>
-                <div mat-dialog-content>
-                    Are you sure you want to update your account?
-                </div>
-                <div mat-dialog-content>
-                    <button (click)="cancelUpdate()" mat-button mat-dialog>Cancel</button>
-                    <button (click)="confirmUpdate()" mat-button mat-dialog>Confirm</button>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div>
-                <div id="customUpdateErrorPrompt1" class="custom-update-error-prompt"
-                    [ngClass]="{ 'show': showUpdateErrorPrompt1 }">
-                    <div class="custom-update-error-prompt-content">
-                        <p>An error occurred while updating your account. Please try again and make sure to
-                            follow the directives under each field.</p>
-                        <button (click)="closeUpdateErrorPrompt()">Close</button>
+        <ng-container>
+            <mat-grid-tile [colspan]="isMediumOrLarger ? 2 : 1" class="update-tile">
+                <div class="position-centered">
+                    <h3 class="section-title edit-title-section">Edit information</h3>
+                    <p class="edit-section-user-hint">Scroll down to complete all the form</p>
+                    <br>
+                    <form class="form">
+                        <mat-form-field subscriptSizing="dynamic" class="input-width">
+                            <mat-label>Username</mat-label>
+                            <input matInput placeholder="" [(ngModel)]="username" name="username">
+                            <mat-hint class="input-hint">At least 5 characters long and only
+                                alphanumerical
+                                characters.
+                            </mat-hint>
+                        </mat-form-field>
+                        <mat-form-field subscriptSizing="dynamic" class="input-width">
+                            <mat-label>Password</mat-label>
+                            <input matInput placeholder="" [(ngModel)]="password" name="password" type="password">
+                            <mat-hint class="input-hint">Can contain alphanumeric / non-alphanumeric
+                                characters.
+                            </mat-hint>
+                        </mat-form-field>
+                        <mat-form-field subscriptSizing="dynamic" class="input-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="abc@domain.abc" [(ngModel)]="email" name="email">
+                            <mat-hint class="input-hint">Email must be in the following format : abc@domain.abc.
+                            </mat-hint>
+                        </mat-form-field>
+                        <mat-form-field subscriptSizing="dynamic" class="input-width">
+                            <mat-label>Birthday</mat-label>
+                            <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker"
+                                [(ngModel)]="birthday" name="birthday" placeholder="Use calendar" [readonly]="true">
+                            <mat-hint class="input-hint">Birthday is optional. If you want to add it, use
+                                the
+                                calendar icon.</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </form>
+                    <div class="example-button-row">
+                        <button (click)="openUpdateConfirmationDialog()" mat-raised-button
+                            color="primary">Update</button>
+                    </div>
+                    <div id="customUpdatePrompt" class="custom-prompt" [ngClass]="{ 'show': showUpdateCustomPrompt }">
+                        <div class="custom-prompt-content">
+                            <h1 mat-dialog-title>Update account</h1>
+                            <div mat-dialog-content>
+                                <p>Are you sure you want to update your account?</p>
+                                <p>Following successful update, you will be redirected to the log in page.</p>
+                            </div>
+                            <div mat-dialog-content class="update-prompt-button-container">
+                                <button (click)="cancelUpdate()" mat-dialog mat-raised-button color="primary"
+                                    class="update-prompt-button">Cancel</button>
+                                <button (click)="confirmUpdate()" mat-dialog mat-raised-button color="primary"
+                                    class="update-prompt-button">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div id="customUpdateErrorPrompt1" class="custom-update-error-prompt"
+                                [ngClass]="{ 'show': showUpdateErrorPrompt1 }">
+                                <div class="custom-update-error-prompt-content">
+                                    <p>An error occurred while updating your account.</p>
+                                    <p>Please try again and make sure to follow the directives under each field.</p>
+                                    <button (click)="closeUpdateErrorPrompt()" mat-raised-button
+                                        color="primary">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div id="customUpdateErrorPrompt2" class="custom-update-error-prompt"
+                                [ngClass]="{ 'show': showUpdateErrorPrompt2 }">
+                                <div class="custom-update-error-prompt-content">
+                                    <p>{{ updateErrorMessage }}</p>
+                                    <button (click)="closeUpdateErrorPrompt()" mat-raised-button
+                                        color="primary">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div>
-            <div>
-                <div id="customUpdateErrorPrompt2" class="custom-update-error-prompt"
-                    [ngClass]="{ 'show': showUpdateErrorPrompt2 }">
-                    <div class="custom-update-error-prompt-content">
-                        <p>{{ updateErrorMessage }}</p>
-                        <button (click)="closeUpdateErrorPrompt()">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </mat-grid-tile>
+        </ng-container>
 
 
         <!-- User delete account section -->
-        <h3>Delete information</h3>
-        <section>
-            <div class="example-button-row">
-                <button (click)="openDeleteConfirmationDialog()" mat-raised-button color="warn">Delete account</button>
-            </div>
-            <div id="customDeletePrompt" class="custom-prompt" [ngClass]="{ 'show': showDeleteCustomPrompt }">
-                <div class="custom-prompt-content">
-                    <h1 mat-dialog-title>Delete account</h1>
-                    <div mat-dialog-content>
-                        Are you sure you want to delete your account? This action is irreversible.
-                    </div>
-                    <div mat-dialog-actions>
-                        <button (click)="cancelDelete()" mat-button mat-dialog>Cancel</button>
-                        <button (click)="confirmDelete()" mat-button mat-dialog>Delete</button>
-                    </div>
+        <mat-grid-tile>
+            <div class="position-centered">
+                <h3 class="section-title">Delete account</h3>
+                <div class="delete-information">
+                    <p>Want to leave us?</p>
+                    <p>By deleting your account, your data will be permanently deleted, and you will have to create a
+                        new account if you wish to return.</p>
+                    <br>
                 </div>
+                <section>
+                    <div class="example-button-row">
+                        <button (click)="openDeleteConfirmationDialog()" mat-raised-button color="warn">Delete
+                            account</button>
+                    </div>
+                    <div id="customDeletePrompt" class="custom-prompt" [ngClass]="{ 'show': showDeleteCustomPrompt }">
+                        <div class="custom-prompt-content">
+                            <h1 mat-dialog-title>Delete account</h1>
+                            <div mat-dialog-content>
+                                <p> Are you sure you want to delete your account?</p>
+                                <p>This action is irreversible.</p>
+                            </div>
+                            <div mat-dialog-actions class="delete-prompt-button-container">
+                                <button (click)="cancelDelete()" class="delete-prompt-button" mat-raised-button
+                                    color="primary" mat-dialog>Cancel</button>
+                                <button (click)="confirmDelete()" class="delete-prompt-button" mat-raised-button
+                                    color="primary" mat-dialog>Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </section>
+        </mat-grid-tile>
+    </mat-grid-list>
 
 
-        <!-- User favorite movies section -->
-        <h3>Favorite movies:</h3>
-        <div style="display: flex;">
-            <mat-card *ngFor="let movie of userInfo.FavoriteMovies">
-                <mat-card-header>
-                    <mat-card-title>{{movie.Title}}</mat-card-title>
-                    <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
-                </mat-card-header>
-                <img src={{movie.ImagePath}} alt={{movie.Title}} />
-                <mat-card-actions>
-                    <button (click)="openGenreDialogue(movie.Genre)" mat-button color="primary">
-                        Genre
-                    </button>
-                    <button (click)="openDirectorDialogue(movie.Director)" mat-button color="primary">
-                        Director
-                    </button>
-                    <button (click)="openSynopsisDialogue(movie.Description)" mat-button color="primary">
-                        Synopsis
-                    </button>
-                </mat-card-actions>
-                <button (click)="removeFromFavorite(movie._id)">remove from favorite</button>
-            </mat-card>
+    <!-- User favorite movies section -->
+    <mat-grid-list cols="1">
+        <h3 class="section-title favorite-movies-title">Favorite movies</h3>
+        <p class="favorite-movies-section-user-hint">Move from side to side to see all movies</p>
+        <div class="movie-container">
+            <div style="display: flex;" fxLayoutGap="20px">
+                <mat-card *ngFor="let movie of userInfo.FavoriteMovies">
+                    <mat-card-header class="card-header-content">
+                        <mat-card-title class="movie-title">{{movie.Title}}</mat-card-title>
+                        <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img src={{movie.ImagePath}} alt={{movie.Title}} />
+                    <mat-card-actions class="card-action-content">
+                        <button (click)="openGenreDialogue(movie.Genre)" mat-button color="primary">
+                            Genre
+                        </button>
+                        <button (click)="openDirectorDialogue(movie.Director)" mat-button color="primary">
+                            Director
+                        </button>
+                        <button (click)="openSynopsisDialogue(movie.Description)" mat-button color="primary">
+                            Synopsis
+                        </button>
+                    </mat-card-actions>
+                    <button (click)="removeFromFavorite(movie._id)" mat-raised-button color="primary">remove from
+                        favorite</button>
+                </mat-card>
+            </div>
         </div>
-    </div>
-
+    </mat-grid-list>
 </body>
 
 </html>
