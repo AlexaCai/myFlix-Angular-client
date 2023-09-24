@@ -30,14 +30,16 @@
 
         <!-- User update account section -->
         <ng-container>
-            <mat-grid-tile [colspan]="isMediumOrLarger ? 2 : 1">
+            <mat-grid-tile [colspan]="isMediumOrLarger ? 2 : 1" class="update-tile">
                 <div class="position-centered">
-                    <h3 class="section-title">Edit information</h3>
+                    <h3 class="section-title edit-title-section">Edit information</h3>
+                    <p class="edit-section-user-hint">Scroll down to complete all the form</p>
+                    <br>
                     <form class="form">
                         <mat-form-field subscriptSizing="dynamic" class="input-width">
                             <mat-label>Username</mat-label>
                             <input matInput placeholder="" [(ngModel)]="username" name="username">
-                            <mat-hint class="input-hint">Username must be at least 5 characters long and contain only
+                            <mat-hint class="input-hint">At least 5 characters long and only
                                 alphanumerical
                                 characters.
                             </mat-hint>
@@ -45,7 +47,7 @@
                         <mat-form-field subscriptSizing="dynamic" class="input-width">
                             <mat-label>Password</mat-label>
                             <input matInput placeholder="" [(ngModel)]="password" name="password" type="password">
-                            <mat-hint class="input-hint">Password can contain alphanumeric and non-alphanumeric
+                            <mat-hint class="input-hint">Can contain alphanumeric / non-alphanumeric
                                 characters.
                             </mat-hint>
                         </mat-form-field>
@@ -154,8 +156,9 @@
 
 
     <!-- User favorite movies section -->
-    <mat-grid-list cols="1" class="test">
+    <mat-grid-list cols="1">
         <h3 class="section-title favorite-movies-title">Favorite movies</h3>
+        <p class="favorite-movies-section-user-hint">Move from side to side to see all movies</p>
         <div class="movie-container">
             <div style="display: flex;" fxLayoutGap="20px">
                 <mat-card *ngFor="let movie of userInfo.FavoriteMovies">
