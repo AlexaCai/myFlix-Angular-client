@@ -1,3 +1,52 @@
+.title-centered {
+  text-align: center;
+}
+
+.input-width {
+  width: 300px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.input-hint {
+  font-size: 10px;
+  margin-bottom: 20px;
+}
+
+.position-centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  align-items: center; 
+  height: 100%;
+}
+
+.favorite-movies-title {
+  text-align: center;
+}
+
+.movie-container {
+  overflow-x: auto; 
+  overflow-y: hidden; 
+}
+
+.card-header-content {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.movie-title {
+  font-weight: 550;
+  padding-bottom: 5px;
+}
+
+.card-action-content {
+  align-items: center; 
+  justify-content: space-between; 
+}
+
 .custom-prompt {
     display: none;
     position: fixed;
@@ -22,7 +71,18 @@
   .custom-prompt.show {
     display: flex;
   }
+
+  .update-prompt-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding-top: 20px;
+  }
   
+  .update-prompt-button {
+    margin-right: 10px; 
+    margin-left: 10px;
+  }
 
 .custom-update-error-prompt{
   display: none;
@@ -49,13 +109,14 @@
   display: flex;
 }
 
-.input-width {
-  width: 300px;
-  padding-left: 10px;
-  padding-right: 10px;
+.delete-prompt-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  padding-top: 20px;
 }
 
-.input-hint {
-  font-size: 10px;
-  margin-bottom: 20px;
+.delete-prompt-button {
+  margin-right: 10px; 
+  margin-left: 10px;
 }
