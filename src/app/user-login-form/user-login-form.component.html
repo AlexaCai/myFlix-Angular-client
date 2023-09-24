@@ -8,24 +8,29 @@
 </head>
 
 <body>
-    <mat-card>
+    <mat-card class="login-form-content-position">
         <mat-card-header>
-            <mat-card-title>Log in!</mat-card-title>
+            <mat-card-title class="card-title">Log in!</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <form>
-                <mat-form-field>
+                <mat-form-field subscriptSizing="dynamic" class="input-field">
                     <input matInput [(ngModel)]="userData.Username" placeholder="Username" type="text" name="Username"
                         required>
+                    <mat-hint class="input-hint">Username contains at least 5 characters long and contains only
+                        alphanumerical characters.
+                    </mat-hint>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field subscriptSizing="dynamic" class="input-field">
                     <input matInput [(ngModel)]="userData.Password" type="password" placeholder="Password"
                         name="Password" required>
+                    <mat-hint class="input-hint">Password can contain alphanumeric and non-alphanumeric characters.
+                    </mat-hint>
                 </mat-form-field>
             </form>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button (click)="loginUser()" color="primary">
+            <button mat-raised-button (click)="loginUser()" color="primary" class="form-login-button">
                 Log in
             </button>
         </mat-card-actions>

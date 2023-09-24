@@ -1,0 +1,73 @@
+html, body {
+    height: 100%;
+}
+
+.welcome-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../../../img/thor-background1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+@media (max-width: 850px){
+    .welcome-view {
+        background-image: url('../../../img/thor-background2.png');
+    }
+}
+
+@media (max-width: 650px){
+    .welcome-view {
+        background-image: url('../../../img/thor-background3.png');
+    }
+}
+
+@media (max-width: 550px){
+    .welcome-view {
+        background-image: url('../../../img/thor-background4.png');
+    }
+}
+
+@media (max-width: 450px){
+    .welcome-view {
+        background-image: url('../../../img/thor-background5.png');
+    }
+}
+
+@media (max-width: 390px){
+    .welcome-view {
+        background-image: url('../../../img/thor-background6.png');
+    }
+}
+
+@media (max-width: 320px){
+    .welcome-view {
+        background-image: url('../../../img/thor-background7.png');
+    }
+}
+
+@media (max-width: 290px){
+    .welcome-view {
+        background-image: url('../../../img/thor-background8.png');
+    }
+}
+
+.main-page {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 20px;
+}
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-button {
+    margin-bottom: 20px;
+}

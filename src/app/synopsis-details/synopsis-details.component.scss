@@ -1,0 +1,15 @@
+.synopsis-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.synopsis-details {
+    text-align: justify
+}
+
+@media (max-width: 400px){
+    .synopsis-details{
+        text-align: left;
+    }
+}

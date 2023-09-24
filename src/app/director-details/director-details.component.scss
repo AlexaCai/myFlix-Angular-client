@@ -1,0 +1,15 @@
+.director-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.director-details {
+    text-align: justify
+}
+
+@media (max-width: 400px){
+    .director-details{
+        text-align: left;
+    }
+}
