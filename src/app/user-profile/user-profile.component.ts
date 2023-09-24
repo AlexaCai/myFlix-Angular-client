@@ -5,6 +5,9 @@ import { GenreDetailsComponent } from '../genre-details/genre-details.component'
 import { DirectorDetailsComponent } from '../director-details/director-details.component';
 import { SynopsisDetailsComponent } from '../synopsis-details/synopsis-details.component';
 import { MatDialog } from '@angular/material/dialog';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
+
 
 
 @Component({
@@ -27,13 +30,15 @@ export class UserProfileComponent implements OnInit {
   showUpdateErrorPrompt1 = false;
   showUpdateErrorPrompt2 = false;
   updateErrorMessage: string = '';
-
+  columnNum: number = 4;
+  isMediumOrLarger: boolean = false;
 
 
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public breakpointObserver: BreakpointObserver
   ) { }
 
 
@@ -47,6 +52,35 @@ export class UserProfileComponent implements OnInit {
         this.fetchUserInfo();
       }
     }
+
+    //***This is use to set up responsiveness of the profile page based on screen size.
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
+      .subscribe((state) => {
+        if (state.matches) {
+          if (state.breakpoints[Breakpoints.XSmall]) {
+            this.columnNum = 1; // For XSmall screens, 1 column
+          } else if (state.breakpoints[Breakpoints.Small]) {
+            this.columnNum = 1; // For Small screens, 2 columns
+          } else if (state.breakpoints[Breakpoints.Medium]) {
+            this.columnNum = 3; // For Medium screens, 4 columns
+          } else {
+            this.columnNum = 3;
+          }
+        }
+      });
+
+    //***This is use to set up responsiveness of the profile page based on screen size.
+    this.breakpointObserver
+      .observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
+      .pipe(
+        map((result: { matches: boolean }) => result.matches)
+      )
+      .subscribe((matches) => {
+        this.isMediumOrLarger = matches;
+        this.columnNum = matches ? 4 : 1;
+      });
+
   }
 
 
@@ -56,7 +90,7 @@ export class UserProfileComponent implements OnInit {
     const selectedDate = d || new Date();
     return selectedDate <= today;
   };
-  
+
 
   fetchUserInfo(): void {
     if (this.loggedInUsername) {
