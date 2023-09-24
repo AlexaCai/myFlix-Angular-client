@@ -1,0 +1,15 @@
+.genre-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.genre-details {
+    text-align: justify
+}
+
+@media (max-width: 400px){
+    .genre-details{
+        text-align: left;
+    }
+}
