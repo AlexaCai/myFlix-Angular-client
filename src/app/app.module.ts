@@ -29,6 +29,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 
 const appRoutes: Routes = [
@@ -72,6 +73,7 @@ const appRoutes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatGridListModule,
+    FlexLayoutModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
