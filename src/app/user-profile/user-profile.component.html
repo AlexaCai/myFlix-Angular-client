@@ -18,9 +18,12 @@
         <!-- User current info section -->
         <mat-grid-tile colspan="1">
             <div class="position-centered">
-                <h3>User information</h3>
-                <p>Name: {{ userInfo.Username }}</p>
-                <p>Email: {{ userInfo.Email }}</p>
+                <h3 class="section-title">User information</h3>
+                <p> <strong>Name:</strong> {{ userInfo.Username }} <br> <strong>Email:</strong> {{ userInfo.Email }}</p>
+                <p class="user-information">If you want to update your information, please fill in the update form.</p>
+                <p class="user-information">All fields must be completed. If you only want to change some information,
+                    enter your current information you want to keep in the corresponding field (e.g. username) along
+                    with the information you want to change in the other field(s).</p>
             </div>
         </mat-grid-tile>
 
@@ -28,8 +31,8 @@
         <!-- User update account section -->
         <mat-grid-tile colspan="2">
             <div class="position-centered">
-                <h3>Edit information</h3>
-                <form class="example-form">
+                <h3 class="section-title">Edit information</h3>
+                <form class="form">
                     <mat-form-field subscriptSizing="dynamic" class="input-width">
                         <mat-label>Username</mat-label>
                         <input matInput placeholder="" [(ngModel)]="username" name="username">
@@ -53,8 +56,7 @@
                         <mat-label>Birthday</mat-label>
                         <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" [(ngModel)]="birthday"
                             name="birthday" placeholder="Use calendar" [readonly]="true">
-                        <mat-hint class="input-hint">Birthday is optional. If you want to add it, pick your birthday
-                            from
+                        <mat-hint class="input-hint">Birthday is optional. If you want to add it, use
                             the
                             calendar icon.</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -68,13 +70,14 @@
                     <div class="custom-prompt-content">
                         <h1 mat-dialog-title>Update account</h1>
                         <div mat-dialog-content>
-                            Are you sure you want to update your account?
+                            <p>Are you sure you want to update your account?</p>
+                            <p>Following successful update, you will be redirected to the log in page.</p>
                         </div>
                         <div mat-dialog-content class="update-prompt-button-container">
-                            <button (click)="cancelUpdate()" mat-dialog mat-raised-button
-                            color="primary" class="update-prompt-button">Cancel</button>
-                            <button (click)="confirmUpdate()" mat-dialog mat-raised-button
-                            color="primary" class="update-prompt-button">Update</button>
+                            <button (click)="cancelUpdate()" mat-dialog mat-raised-button color="primary"
+                                class="update-prompt-button">Cancel</button>
+                            <button (click)="confirmUpdate()" mat-dialog mat-raised-button color="primary"
+                                class="update-prompt-button">Update</button>
                         </div>
                     </div>
                 </div>
@@ -83,10 +86,10 @@
                         <div id="customUpdateErrorPrompt1" class="custom-update-error-prompt"
                             [ngClass]="{ 'show': showUpdateErrorPrompt1 }">
                             <div class="custom-update-error-prompt-content">
-                                <p>An error occurred while updating your account. Please try again and make sure to
-                                    follow the directives under each field.</p>
+                                <p>An error occurred while updating your account.</p>
+                                <p>Please try again and make sure to follow the directives under each field.</p>
                                 <button (click)="closeUpdateErrorPrompt()" mat-raised-button
-                                color="primary">Close</button>
+                                    color="primary">Close</button>
                             </div>
                         </div>
                     </div>
@@ -98,7 +101,7 @@
                             <div class="custom-update-error-prompt-content">
                                 <p>{{ updateErrorMessage }}</p>
                                 <button (click)="closeUpdateErrorPrompt()" mat-raised-button
-                                color="primary">Close</button>
+                                    color="primary">Close</button>
                             </div>
                         </div>
                     </div>
@@ -111,7 +114,13 @@
         <!-- User delete account section -->
         <mat-grid-tile colspan="1">
             <div class="position-centered">
-                <h3>Delete account</h3>
+                <h3 class="section-title">Delete account</h3>
+                <div class="delete-information">
+                    <p>Want to leave us?</p>
+                    <p>By deleting your account, your data will be permanently deleted, and you will have to create a
+                        new account if you wish to return.</p>
+                        <br>
+                </div>
                 <section>
                     <div class="example-button-row">
                         <button (click)="openDeleteConfirmationDialog()" mat-raised-button color="warn">Delete
@@ -121,13 +130,14 @@
                         <div class="custom-prompt-content">
                             <h1 mat-dialog-title>Delete account</h1>
                             <div mat-dialog-content>
-                                Are you sure you want to delete your account? This action is irreversible.
+                                <p> Are you sure you want to delete your account?</p>
+                                <p>This action is irreversible.</p>
                             </div>
                             <div mat-dialog-actions class="delete-prompt-button-container">
                                 <button (click)="cancelDelete()" class="delete-prompt-button" mat-raised-button
-                                color="primary" mat-dialog>Cancel</button>
+                                    color="primary" mat-dialog>Cancel</button>
                                 <button (click)="confirmDelete()" class="delete-prompt-button" mat-raised-button
-                                color="primary" mat-dialog>Delete</button>
+                                    color="primary" mat-dialog>Delete</button>
                             </div>
                         </div>
                     </div>
@@ -139,30 +149,31 @@
 
     <!-- User favorite movies section -->
     <mat-grid-list cols="1" class="test">
-            <h3 class="favorite-movies-title">Favorite movies</h3>
-            <div class="movie-container">
-                <div style="display: flex;" fxLayoutGap="20px">
-                    <mat-card *ngFor="let movie of userInfo.FavoriteMovies">
-                        <mat-card-header class="card-header-content">
-                            <mat-card-title class="movie-title">{{movie.Title}}</mat-card-title>
-                            <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
-                        </mat-card-header>
-                        <img src={{movie.ImagePath}} alt={{movie.Title}} />
-                        <mat-card-actions class="card-action-content">
-                            <button (click)="openGenreDialogue(movie.Genre)" mat-button color="primary">
-                                Genre
-                            </button>
-                            <button (click)="openDirectorDialogue(movie.Director)" mat-button color="primary">
-                                Director
-                            </button>
-                            <button (click)="openSynopsisDialogue(movie.Description)" mat-button color="primary">
-                                Synopsis
-                            </button>
-                        </mat-card-actions>
-                        <button (click)="removeFromFavorite(movie._id)" mat-raised-button color="primary">remove from favorite</button>
-                    </mat-card>
-                </div>
+        <h3 class="section-title favorite-movies-title">Favorite movies</h3>
+        <div class="movie-container">
+            <div style="display: flex;" fxLayoutGap="20px">
+                <mat-card *ngFor="let movie of userInfo.FavoriteMovies">
+                    <mat-card-header class="card-header-content">
+                        <mat-card-title class="movie-title">{{movie.Title}}</mat-card-title>
+                        <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img src={{movie.ImagePath}} alt={{movie.Title}} />
+                    <mat-card-actions class="card-action-content">
+                        <button (click)="openGenreDialogue(movie.Genre)" mat-button color="primary">
+                            Genre
+                        </button>
+                        <button (click)="openDirectorDialogue(movie.Director)" mat-button color="primary">
+                            Director
+                        </button>
+                        <button (click)="openSynopsisDialogue(movie.Description)" mat-button color="primary">
+                            Synopsis
+                        </button>
+                    </mat-card-actions>
+                    <button (click)="removeFromFavorite(movie._id)" mat-raised-button color="primary">remove from
+                        favorite</button>
+                </mat-card>
             </div>
+        </div>
     </mat-grid-list>
 </body>
 

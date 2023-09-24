@@ -1,11 +1,40 @@
 .title-centered {
   text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-title {
+  padding: 5px;
+  background-color: rgba(63, 81, 181, 0.3);
+}
+
+
+.user-information {
+  font-size: 12px;
+  text-align: center;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-gap: 10px; 
+}
+
+.mat-form-field {
+  width: 100%;
+  margin: 0;
 }
 
 .input-width {
-  width: 300px;
+  width: 250px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+@media (max-width: 1080px){
+  .input-width {
+    width: 200px;
+  }
 }
 
 .input-hint {
@@ -16,35 +45,11 @@
 .position-centered {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
   align-items: center; 
   height: 100%;
-}
-
-.favorite-movies-title {
+  padding: 25px;
+  margin-bottom: 30px;
   text-align: center;
-}
-
-.movie-container {
-  overflow-x: auto; 
-  overflow-y: hidden; 
-}
-
-.card-header-content {
-  text-align: center;
-  width: 100%;
-  display: inline-block;
-  padding-bottom: 10px;
-}
-
-.movie-title {
-  font-weight: 550;
-  padding-bottom: 5px;
-}
-
-.card-action-content {
-  align-items: center; 
-  justify-content: space-between; 
 }
 
 .custom-prompt {
@@ -109,6 +114,12 @@
   display: flex;
 }
 
+.delete-information{
+  font-size: 12px;
+  text-align: center;
+}
+
+
 .delete-prompt-button-container {
   display: flex;
   justify-content: center;
@@ -119,4 +130,30 @@
 .delete-prompt-button {
   margin-right: 10px; 
   margin-left: 10px;
+}
+
+.favorite-movies-title {
+  text-align: center;
+}
+
+.movie-container {
+  overflow-x: auto; 
+  overflow-y: hidden; 
+}
+
+.card-header-content {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.movie-title {
+  font-weight: 550;
+  padding-bottom: 5px;
+}
+
+.card-action-content {
+  align-items: center; 
+  justify-content: space-between; 
 }
