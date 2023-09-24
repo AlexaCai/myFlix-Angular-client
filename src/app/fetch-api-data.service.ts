@@ -128,8 +128,9 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
+  
 
-
+  //***Making the api call to the endpoint which POST a movie to user's favorite movie.
   userAddFavoriteMovie(Username: string, MovieID: string): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
@@ -168,12 +169,11 @@ export class FetchApiDataService {
       })
     }).pipe(
       catchError((error) => {
-        //***Return the error response as an object with status and message properties (used to display during update if user try to use a username or email already used by someone else).
+        //***Return the error response as an object with status and message properties (messages is used to display the right information during sign up/update process if users try to use a username or an email already used by someone else).
         return throwError({ status: error.status, message: error.error });
       })
     );
   }
-
 
 
   //***Making the api call to the endpoint which DELETE user account.
@@ -192,7 +192,7 @@ export class FetchApiDataService {
   }
 
 
-  //***on-typed response extraction
+  //***On-typed response extraction
   private extractResponseData(res: any): any {
     const body = res;
     return body || {};
