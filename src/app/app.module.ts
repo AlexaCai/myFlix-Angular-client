@@ -24,10 +24,11 @@ import { RemoveFavoriteDetailsComponent } from './remove-favorite-details/remove
 import { AddFavoriteDetailsComponent } from './add-favorite-details/add-favorite-details.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 const appRoutes: Routes = [
@@ -70,6 +71,7 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatGridListModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
