@@ -21,7 +21,6 @@ export class FetchApiDataService {
 
   //***Making the api call for the user registration endpoint.
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe(
       catchError((error) => {
         //***Return the error response as an object with status and message properties (used to display during update if user try to use a username or email already used by someone else).
@@ -33,7 +32,6 @@ export class FetchApiDataService {
 
   //***Making the api call for the user login endpoint.
   public userLogin(userDetails: any): Observable<any> {
-    console.log(userDetails);
     return this.http.post(apiUrl + 'login', userDetails).pipe(
       catchError(this.handleError)
     );

@@ -26,7 +26,6 @@ export class UserLoginFormComponent implements OnInit {
 
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((response) => {
-      console.log(response)
       const { user, token } = response;
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
