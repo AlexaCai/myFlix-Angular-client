@@ -38,7 +38,6 @@ export class MovieCardComponent {
       this.movies = resp;
       this.movies.forEach((movie) => {
       });
-      console.log(this.movies);
       return this.movies;
     });
   }
@@ -73,7 +72,6 @@ export class MovieCardComponent {
     const loggedInUsername = this.retrieveUsernameFromLocalStorage();
     this.fetchApiData.userAddFavoriteMovie(loggedInUsername, MovieID).subscribe(
       (resp: any) => {
-        console.log(resp);
         this.favoriteButtonStates[MovieID] = true;
       },
       (error) => {
@@ -87,7 +85,6 @@ export class MovieCardComponent {
     const loggedInUsername = this.retrieveUsernameFromLocalStorage();
     this.fetchApiData.userDeleteFavoriteMovie(loggedInUsername, MovieID).subscribe(
       (resp: any) => {
-        console.log(resp);
         this.favoriteButtonStates[MovieID] = false;
       },
       (error) => {

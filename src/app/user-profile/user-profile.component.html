@@ -77,7 +77,7 @@
                             <h1 mat-dialog-title>Update account</h1>
                             <div mat-dialog-content>
                                 <p>Are you sure you want to update your account?</p>
-                                <p>Following successful update, you will be redirected to the log in page.</p>
+                                <p>Following successful update, you will be redirected to the login page.</p>
                             </div>
                             <div mat-dialog-content class="update-prompt-button-container">
                                 <button (click)="cancelUpdate()" mat-dialog mat-raised-button color="primary"
@@ -156,7 +156,7 @@
     <!-- User favorite movies section -->
     <mat-grid-list cols="1">
         <h3 class="section-title favorite-movies-title">Favorite movies</h3>
-        <p class="favorite-movies-section-user-hint">Move from side to side to see all movies</p>
+        <p class="favorite-movies-section-user-hint">Move from side to side to see all movies (when many movies in favorite)</p>
         <div class="movie-container">
             <div style="display: flex;" fxLayoutGap="20px">
                 <mat-card *ngFor="let movie of userInfo.FavoriteMovies">

@@ -9,7 +9,6 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 
 
-
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -47,7 +46,6 @@ export class UserProfileComponent implements OnInit {
     if (userString) {
       const user = JSON.parse(userString);
       this.loggedInUsername = user.Username;
-      console.log(this.loggedInUsername);
       if (this.loggedInUsername) {
         this.fetchUserInfo();
       }
@@ -96,7 +94,6 @@ export class UserProfileComponent implements OnInit {
     if (this.loggedInUsername) {
       this.fetchApiData.getUserInfo(this.loggedInUsername).subscribe((resp: any) => {
         this.userInfo = resp;
-        console.log(this.userInfo);
         this.fetchFavoriteMovies(this.userInfo.FavoriteMovies);
       });
     }
@@ -176,7 +173,6 @@ export class UserProfileComponent implements OnInit {
     const loggedInUsername = this.retrieveUsernameFromLocalStorage();
     this.fetchApiData.userDeleteFavoriteMovie(loggedInUsername, MovieID).subscribe(
       (resp: any) => {
-        console.log(resp);
         const updatedMovieIds = this.userInfo.FavoriteMovies
           .filter((movie: any) => movie._id !== MovieID)
           .map((movie: any) => movie._id);
@@ -200,7 +196,6 @@ export class UserProfileComponent implements OnInit {
     this.showUpdateCustomPrompt = false;
   }
   updateAccount(): void {
-    console.log("updateAccount method called"); // Add this line for debugging
     if (this.loggedInUsername) {
       const userData = {
         Username: this.username,
