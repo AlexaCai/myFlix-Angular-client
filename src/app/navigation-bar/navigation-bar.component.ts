@@ -1,3 +1,13 @@
+/**
+ * @module navigation-bar
+ * @remarks
+ * This component is the navigation tool for the app. It displays three possible actions to users:
+ * 
+ * -Go to home (home can also be accessed by clicking on the myFlix icon on the left side of the navigation bar) <br>
+ * -Go to profile <br>
+ * -Log out <br>
+ */
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 

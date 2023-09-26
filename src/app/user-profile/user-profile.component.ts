@@ -1,3 +1,23 @@
+/**
+ * @module user-profile
+ * @remarks
+ * This component displays users' information (username, email and favorite movies) in one specific page, as well as allowing users to perform different actions on their account (update information or delete account). 
+ * 
+ * When users are going to their profile page, all the movies they've added to their list of favorite are displayed there. Users can also remove movies in their favorite from this page, and the page will update instantly. The movies added by users into their favorite persist between sessions.
+ * 
+ * This component include several functions:
+ * 
+ * -1 function to format users' birthdate correctly <br>
+ * -1 function to fetch users' information <br>
+ * -1 function to fetch users' favorite movies specifically <br>
+ * -3 functions to open favorite movie's dialogs (genre, director and synopsis) <br>
+ * -1 function to remove movies from list of favorite <br>
+ * -1 function to allow users to update their account <br>
+ * -1 function to allow users to delete their account <br>
+ *
+ * @returns User's all information.
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
 import { Router } from '@angular/router';
@@ -51,7 +71,10 @@ export class UserProfileComponent implements OnInit {
       }
     }
 
-    //***This is use to set up responsiveness of the profile page based on screen size.
+    
+    /** 
+    * This is use to set up responsiveness of the profile page based on screen size.
+    */
     this.breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
       .subscribe((state) => {
@@ -68,7 +91,10 @@ export class UserProfileComponent implements OnInit {
         }
       });
 
-    //***This is use to set up responsiveness of the profile page based on screen size.
+
+    /** 
+    * Used to set up responsiveness of the profile page based on screen size.
+    */
     this.breakpointObserver
       .observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
       .pipe(
@@ -82,7 +108,9 @@ export class UserProfileComponent implements OnInit {
   }
 
 
-  //***Use to ensure users cannot select birthday later than the current day.
+  /** 
+  * Used to ensure users cannot select a birth date later than the current day.
+  */
   myFilter = (d: Date | null): boolean => {
     const today = new Date();
     const selectedDate = d || new Date();
@@ -154,6 +182,9 @@ export class UserProfileComponent implements OnInit {
   }
 
 
+  /** 
+ * Used to display the correct favorite icon state in the action bar below each favorite movie shown when the page is open, depending on if movies have been added to favorite in past sessions or not.
+ */
   loadFavoriteButtonStates(): void {
     const loggedInUsername = this.retrieveUsernameFromLocalStorage();
     this.fetchApiData.getUserfavoriteMovies(loggedInUsername).subscribe(

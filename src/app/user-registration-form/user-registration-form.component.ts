@@ -1,3 +1,23 @@
+/**
+ * @module user-registration
+ * @remarks
+ * This component allows users to sign up into the app via a dialog prompt (when 'sign up' button on the welcome page is clicked by users).
+ * @example  
+ * In the TypeScript file, the following input informations entered by users in the html sign up form are used to processed the sign up logic using the registerUser function.
+ * 
+ * Username 
+ * Password 
+ * Email 
+ * Birthday (optional)
+ * 
+ * Upon successful sign up, a confirmation dialog appears on the users' UI, and the sign up prompt form closes so that users can log in. If the sign up failed, a dialog appears to let users know.
+ * @param - Username = user's username <br>
+ * Password = user's password <br>
+ * Email = user's email <br>
+ * Birthday = user's birthday <br>
+ * @returns Sign up prompt form on the welcome page closes automatically to let users log in.
+ */
+
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
