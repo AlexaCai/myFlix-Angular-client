@@ -1,3 +1,19 @@
+/**
+ * @module user-login
+ * @remarks
+ * This component allows users to log in into the app via a dialog prompt (when 'log in' button on the welcome page is clicked by users).
+ * @example  
+ * In the TypeScript file, the following input information entered by users in the html log in form is used to process the login logic using the loginUser function.
+ * 
+ * Username
+ * Password
+ * 
+ * Upon successful log in, a confirmation dialog appears in the users' UI, and the users are redirected to the app initial page (see get-all-movie section (movie-card.component.html)). If the log in failed, a dialog appears to let users know.
+ * @param - Username = user's username <br>
+ * Password = user's password
+ * @returns Automatic redirection to the app initial and main page where all movies are displayed.
+ */
+
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';

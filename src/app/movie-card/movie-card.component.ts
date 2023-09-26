@@ -1,3 +1,21 @@
+/**
+ * @module get-all-movies
+ * @remarks
+ * This component is the main one of the app and act as the main page. It allows to display all movies from the database once users successfully log in. To do so, it takes the information about each movie, and renders it in the html.
+ * 
+ * When users are logging in, the component also loads automatically the users' list of favorite to display the correct state of each favorite icon button in the action bar below each movie. This allows to display each movie as already listed in the users' favorite or not upon every connection, depending on the activity of the last session.
+ * 
+ * This component includes several functions:
+ * 
+ * -1 function to load all movies from the database upon connection <br>
+ * -1 function to load the favorite icon button state and ensure consistency between users session <br>
+ * -1 function to retrieve users' information from localStorage (used in other functions) <br>
+ * -1 function to add movie to users' list of favorite <br>
+ * -1 function to remove movies from users' list of favorite <br>
+ * -5 functions to open dialogs based on users interaction on the movie cards: (1) show director info, (2) show genre info, (3) show movie info and (4 & 5) confirmation message after adding/removing movie to/from list of favorite. <br>
+ * @returns Movie's all information.
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
 import { MatDialog } from '@angular/material/dialog';
@@ -42,7 +60,9 @@ export class MovieCardComponent {
     });
   }
 
-  
+  /** 
+ * Used to display the correct favorite icon state in the action bar below each movie shown when the page is open, depending on if movies have been added to favorite in past sessions or not.
+ */
   loadFavoriteButtonStates(): void {
     const loggedInUsername = this.retrieveUsernameFromLocalStorage();
     this.fetchApiData.getUserfavoriteMovies(loggedInUsername).subscribe(
