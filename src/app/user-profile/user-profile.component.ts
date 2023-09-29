@@ -80,13 +80,13 @@ export class UserProfileComponent implements OnInit {
       .subscribe((state) => {
         if (state.matches) {
           if (state.breakpoints[Breakpoints.XSmall]) {
-            this.columnNum = 1; // For XSmall screens, 1 column
+            this.columnNum = 1; 
           } else if (state.breakpoints[Breakpoints.Small]) {
-            this.columnNum = 1; // For Small screens, 2 columns
+            this.columnNum = 1; 
           } else if (state.breakpoints[Breakpoints.Medium]) {
-            this.columnNum = 3; // For Medium screens, 4 columns
+            this.columnNum = 2; 
           } else {
-            this.columnNum = 3;
+            this.columnNum = 2;
           }
         }
       });
@@ -96,14 +96,10 @@ export class UserProfileComponent implements OnInit {
     * Used to set up responsiveness of the profile page based on screen size.
     */
     this.breakpointObserver
-      .observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
-      .pipe(
-        map((result: { matches: boolean }) => result.matches)
-      )
-      .subscribe((matches) => {
-        this.isMediumOrLarger = matches;
-        this.columnNum = matches ? 4 : 1;
-      });
+    .observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
+    .subscribe((state) => {
+      this.isMediumOrLarger = state.matches;
+    });
 
   }
 

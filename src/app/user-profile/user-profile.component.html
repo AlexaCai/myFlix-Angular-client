@@ -12,11 +12,10 @@
 
     <h1 class="title-centered">User profile</h1>
 
-    <mat-grid-list [cols]="columnNum" rowHeight="350px">
-
+    <mat-grid-list [cols]="isMediumOrLarger ? 4 : 3" rowHeight="350px">
 
         <!-- User current info section -->
-        <mat-grid-tile>
+        <mat-grid-tile [colspan]="isMediumOrLarger ? 1 : 3">
             <div class="position-centered">
                 <h3 class="section-title">User information</h3>
                 <p> <strong>Name:</strong> {{ userInfo.Username }} <br> <strong>Email:</strong> {{ userInfo.Email }}</p>
@@ -30,7 +29,7 @@
 
         <!-- User update account section -->
         <ng-container>
-            <mat-grid-tile [colspan]="isMediumOrLarger ? 2 : 1" class="update-tile">
+            <mat-grid-tile [colspan]="isMediumOrLarger ? 2 : 3" class="update-tile">
                 <div class="position-centered">
                     <h3 class="section-title edit-title-section">Edit information</h3>
                     <p class="edit-section-user-hint">Scroll down to complete all the form</p>
@@ -118,7 +117,7 @@
 
 
         <!-- User delete account section -->
-        <mat-grid-tile>
+        <mat-grid-tile [colspan]="isMediumOrLarger ? 1 : 3">
             <div class="position-centered">
                 <h3 class="section-title">Delete account</h3>
                 <div class="delete-information">
